@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Detrás, un mensaje con cariño</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Georgia', serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+
+      background-color: #fff;
+      background-image: radial-gradient(rgba(236, 137, 181, 0.3) 1.5px, transparent 1.5px);
+      background-size: 30px 30px;
+      background-position: center;
+    }
+    .container {
+      position: relative;
+      width: 430px;
+      height: 630px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .portada,
+    .decoracion-texto {
+      transition: transform 1s ease, opacity 1s ease;
+    }
+
+    .portada.caida,
+    .decoracion-texto.caida {
+      transform: translateY(150%) rotate(15deg);
+      opacity: 0;
+    }
+
+    .portada {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 30px;
+      overflow: hidden;
+      z-index: 3;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .portada img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .carta {
+      background: #fff;
+      width: 100%;
+      height: 100%;
+      border-radius: 30px;
+      border: 1px solid #ddd;
+      padding: 30px 25px 40px;
+      text-align: justify;
+      font-size: 13px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      position: relative;
+      z-index: 1;
+    }
+
+    .carta::before {
+      content: "✧";
+      display: block;
+      text-align: center;
+      font-size: 18px;
+      margin-bottom: 8px;
+      color: #888;
+    }
+
+    .titulo {
+      text-align: center;
+      font-size: 11px;
+      margin-bottom: 15px;
+      color: #555;
+    }
+
+    .lazo {
+      position: absolute;
+      top: -25px;
+      right: 20px;
+      width: 60px;
+    }
+
+    .decoracion-texto {
+      position: absolute;
+      top: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 20px;
+      color: #ec89b5;
+      font-weight: bold;
+      font-family: 'Comic Sans MS', cursive;
+      z-index: 4;
+      cursor: pointer;
+      text-shadow: 1px 1px 2px #fff;
+    }
+
+    .boton-reiniciar {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
+      background-color: #ffb6c1;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-family: 'Comic Sans MS', cursive;
+      border-radius: 20px;
+      cursor: pointer;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      display: none;
+    }
+
+    .boton-reiniciar.visible {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <div class="carta">
+      <div class="titulo">CON CARIÑO PARA NELLI<br> 愛してます</div>
+      <p>
+  A veces, las palabras son lo único que tenemos para intentar capturar lo que sentimos. Y aunque no siempre alcanzan, hoy quiero dejar que hablen por mí. No porque haya algo urgente que decir, sino porque hay cosas que el corazón guarda con tanto cuidado, que tarde o temprano necesitan volar.
+</p>
+<p>
+  He aprendido que hay personas que llegan como el atardecer: sin avisar, sin prisa, pero con una belleza que envuelve todo. Hay miradas que, sin proponérselo, dicen más que mil frases. Y hay presencias que, aunque no se anuncien, logran calmar tormentas internas sin hacer preguntas.
+</p>
+<p>
+  No sabría decir desde cuándo, pero hay momentos en los que me descubro pensando en ti sin razón aparente. Como si algo en ti trajera calma, como si escuchar tu voz o ver tu sonrisa fuera suficiente para que un mal día se vuelva un poco más ligero.
+</p>
+<p>
+  Me gusta cómo existes, así de sencillo. Cómo te ríes sin darte cuenta del eco que dejas. Cómo caminas entre la gente, sin saber que alguien nota el brillo con el que te mueves. Me gusta cómo haces que lo cotidiano parezca especial, como si fueras un poema escondido entre líneas de un libro que no todos logran leer.
+</p>
+<p>
+  No necesitas hacer nada extraordinario para dejar una huella. A veces, solo tu forma de ser ya es un refugio, un rincón bonito en medio de tanto ruido. Gracias por eso. Por ser quien eres. Por existir de la manera en que existes.
+</p>
+<p>
+  Y aunque quizás nunca leas esto sabiendo lo que realmente inspira cada palabra, no importa. Porque escribirlo ya es un regalo. Porque hay personas que no necesitan saber lo que provocan… basta con que sigan siendo ellas mismas, y eso es más que suficiente.
+</p>
+      <p style="text-align: center; margin-top: 1em;"><em>Atte. Yeyita</em></p>
+    </div>
+
+    <div class="portada" id="portada" onclick="ocultarImagen()" role="button" aria-label="Abrir carta">
+      <img src="https://acortar.link/p9tczq" alt="Imagen portada" />
+    </div>
+
+    <div class="decoracion-texto" id="decoracion">CARTA DE AMOR</div>
+
+    <button class="boton-reiniciar" id="btnReset" onclick="reiniciar()">♡ Reiniciar ♡</button>
+
+  </div>
+
+  <script>
+    function ocultarImagen() {
+      document.getElementById('portada').classList.add('caida');
+      document.getElementById('decoracion').classList.add('caida');
+      document.getElementById('btnReset').classList.add('visible');
+    }
+
+    function reiniciar() {
+      document.getElementById('portada').classList.remove('caida');
+      document.getElementById('decoracion').classList.remove('caida');
+      document.getElementById('btnReset').classList.remove('visible');
+    }
+  </script>
+
+</body>
+</html>
